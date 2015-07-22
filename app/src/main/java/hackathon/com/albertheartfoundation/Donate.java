@@ -2,6 +2,7 @@ package hackathon.com.albertheartfoundation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.printservice.PrintService;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,12 +15,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aevi.helpers.services.AeviServiceConnectionCallback;
 import com.aevi.payment.PaymentRequest;
 import com.aevi.payment.TransactionResult;
+import com.aevi.printing.PrintServiceProvider;
+import com.aevi.printing.model.Alignment;
+import com.aevi.printing.model.PrintPayload;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Currency;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class Donate extends ActionBarActivity {
@@ -30,6 +38,9 @@ public class Donate extends ActionBarActivity {
     Button btnDonate;
     EditText txtNewAmount;
     TextView txtFinalAmount;
+
+    private PrintServiceProvider serviceProvider = new PrintServiceProvider(this);
+    private PrintService printService;
 
     double amount = 0.00;
 
@@ -92,7 +103,10 @@ public class Donate extends ActionBarActivity {
         // Obtain the transaction result from the returned data.
         TransactionResult result = TransactionResult.fromIntent(data);
         // Use a toast to show the transaction result.
-        Toast.makeText(this,"Transaction result: " + result.getTransactionStatus(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Transaction result: " + result.getTransactionStatus(), Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this, Print.class);
+        startActivity(i);
+        finish();
     }
 
     @Override
