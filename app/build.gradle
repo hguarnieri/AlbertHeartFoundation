@@ -1,0 +1,83 @@
+def stagingCertificate = 'application.jks'
+def stagingCertPassword = 'heslo'
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "hackathon.com.albertheartfoundation"
+        minSdkVersion 15
+        targetSdkVersion 15
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        staging {
+            debuggable true
+        }
+
+        debug {
+            debuggable true
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile files('libs/aevi-api-2.3.0.jar')
+}
+
+def getAdbPath() {
+    def rootDir = project.rootDir
+    def localProperties = new File(rootDir, "local.properties")
+    if (localProperties.exists()) {
+        Properties properties = new Properties()
+        localProperties.withInputStream {
+            instr -> properties.load(instr)
+        }
+        def sdkDir = properties.getProperty('sdk.dir')
+        return "$sdkDir/platform-tools/adb"
+    }
+    return ""
+}
+
+// Some Gradle magic to generate dynamic tasks for staging
+afterEvaluate {
+    def apkOutputDir = "build/outputs/apk"
+    def adbPath = getAdbPath()
+    android.applicationVariants.each { variant ->
+        if (variant.buildType.name.equals("staging")) {
+            def apkOutputFile = "${apkOutputDir}/AlbertHeartFoundation.apk"
+            def variantOutput = variant.outputs[0].outputFile
+
+            task("signAlbertStaging", type: Exec, dependsOn: variant.assemble) {
+                description = 'Sign APK for Albert'
+                group = 'Albert'
+                commandLine "jarsigner", "-keystore", "$stagingCertificate", "-storepass", "$stagingCertPassword", "-digestalg", "SHA-256", "-sigalg", "MD5withRSA", "-signedjar", "$apkOutputFile", "$variantOutput", "application"
+                println("jarsigner -keystore $stagingCertificate -storepass $stagingCertPassword -digestalg SHA-256 -sigalg MD5withRSA -signedjar $apkOutputFile $variantOutput application")
+            }
+
+            task("installAlbertStaging", type: Exec, dependsOn: "signAlbertStaging") {
+                description = 'Install APK on Albert'
+                group = 'Albert'
+                commandLine "$adbPath", "install", "-r", "$apkOutputFile"
+            }
+
+            task("runAlbertStaging", type: Exec, dependsOn: "installAlbertStaging") {
+                description = 'Run APK on Albert'
+                group = 'Albert'
+                commandLine "$adbPath", "shell", "am", "start", "-n", "hackathon.com.albertheartfoundation/hackathon.com.albertheartfoundation.MainSignup"
+            }
+
+            variant.outputsAreSigned = true
+        }
+    }
+}

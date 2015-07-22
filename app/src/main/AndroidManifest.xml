@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="hackathon.com.albertheartfoundation" >
+
+    <uses-permission android:name="com.aevi.permission.CONFIGURATION" />
+    <uses-permission android:name="com.aevi.permission.PAYMENT_REQUEST" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainSignup"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Donate"
+            android:label="@string/app_name" >
+
+        </activity>
+    </application>
+    <meta-data android:name="application-type" android:value="vaa_merchant"/>
+</manifest>

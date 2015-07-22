@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">AlbertHeartFoundation</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="donation_values">
+        <item>$ 5.00</item>
+        <item>$ 10.00</item>
+        <item>$ 15.00</item>
+        <item>$ 20.00</item>
+        <item>$ 25.00</item>
+        <item>$ 50.00</item>
+        <item>$ 100.00</item>
+        <item>$ 150.00</item>
+        <item>$ 250.00</item>
+        <item>$ 500.00</item>
+        <item>$ 750.00</item>
+        <item>$ 1000.00</item>
+        <item>$ 1250.00</item>
+        <item>$ 1500.00</item>
+        <item>$ 2000.00</item>
+        <item>$ 5000.00</item>
+        <item>$ 10000.00</item>
+    </string-array>
+</resources>
