@@ -1,20 +1,32 @@
 package hackathon.com.albertheartfoundation;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.lang.reflect.Array;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends FragmentActivity {
+
+    PagesCollectionPagerAdapter mPagesCollectionPagerAdapter;
+    ViewPager mViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +51,13 @@ public class MainActivity extends ActionBarActivity {
         adapter_age.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_age.setAdapter(adapter_age);
 
-        // Load webview page
-        WebView webView = (WebView) findViewById(R.id.webView);
-        webView.loadUrl("http://www.google.com/");
-
+        // ViewPager and its adapters use support library
+        // fragments, so use getSupportFragmentManager.
+        mPagesCollectionPagerAdapter =
+                new PagesCollectionPagerAdapter(
+                        getSupportFragmentManager());
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mPagesCollectionPagerAdapter);
 
         // Init button actions
         Button btnSignin;
@@ -88,8 +103,53 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void renderSignUpActivity() {
+    public class PagesCollectionPagerAdapter extends FragmentStatePagerAdapter {
+        public PagesCollectionPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
+        @Override
+        public Fragment getItem(int i) {
+            Fragment fragment = new PageObjectFragment();
+            Bundle args = new Bundle();
+            // Our object is just an integer :-P
+            args.putInt(PageObjectFragment.ARG_OBJECT, i + 1);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return 100;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "OBJECT " + (position + 1);
+        }
+    }
+
+    // Instances of this class are fragments representing a single
+// object in our collection.
+    public static class PageObjectFragment extends Fragment {
+        public static final String ARG_OBJECT = "object";
+
+        @Override
+        public View onCreateView(LayoutInflater inflater,
+                                 ViewGroup container, Bundle savedInstanceState) {
+            // The last two arguments ensure LayoutParams are inflated
+            // properly.
+            View rootView = inflater.inflate(
+                    R.layout.fragment_collection_object, container, false);
+            //Bundle args = getArguments();
+
+            WebView webView = (WebView) rootView.findViewById(R.id.webView);
+            webView.loadUrl("http://www.google.com/");
+
+            //((TextView) rootView.findViewById(android.R.id.text1)).setText(
+                  //  Integer.toString(args.getInt(ARG_OBJECT)));
+            return rootView;
+        }
     }
 
 }
