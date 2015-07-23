@@ -5,6 +5,7 @@
     <uses-permission android:name="com.aevi.permission.CONFIGURATION" />
     <uses-permission android:name="com.aevi.permission.PAYMENT_REQUEST" />
     <uses-permission android:name="com.aevi.permission.PRINT_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -33,4 +34,5 @@
         </activity>
     </application>
     <meta-data android:name="application-type" android:value="vaa_merchant"/>
+    <meta-data android:name="ip-addresses" android:value="0.0.0.0/0" />
 </manifest>

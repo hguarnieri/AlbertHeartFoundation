@@ -141,10 +141,10 @@ public class MainActivity extends FragmentActivity {
             // properly.
             View rootView = inflater.inflate(
                     R.layout.fragment_collection_object, container, false);
-            //Bundle args = getArguments();
+            Bundle args = getArguments();
 
             WebView webView = (WebView) rootView.findViewById(R.id.webView);
-            webView.loadUrl("http://www.google.com/");
+            webView.loadUrl("file:///android_asset/page" + Integer.toString(args.getInt(ARG_OBJECT)) + ".html");
 
             //((TextView) rootView.findViewById(android.R.id.text1)).setText(
                   //  Integer.toString(args.getInt(ARG_OBJECT)));
