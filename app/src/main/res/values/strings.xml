@@ -23,4 +23,20 @@
         <item>$ 5000.00</item>
         <item>$ 10000.00</item>
     </string-array>
+
+    <string-array name="ages_array">
+        <item>0-10</item>
+        <item>11-20</item>
+        <item>21-30</item>
+        <item>31-40</item>
+        <item>41-50</item>
+        <item>51-60</item>
+        <item>61-70</item>
+        <item>70+</item>
+    </string-array>
+
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>
