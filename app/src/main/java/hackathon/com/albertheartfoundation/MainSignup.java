@@ -58,7 +58,7 @@ public class MainSignup extends ActionBarActivity {
                 } else if (txtEmail.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "The Email cannot be empty", Toast.LENGTH_SHORT).show();
                 } else {
-                    BackgroundTask task = new BackgroundTask() {
+                    /*BackgroundTask task = new BackgroundTask() {
                         @Override
                         protected void onPostExecute(Void result) {
                             if (dialog.isShowing()) {
@@ -71,7 +71,11 @@ public class MainSignup extends ActionBarActivity {
                     task.execute("http://192.168.43.102:8080/heartfoundation/registerUser?firstname="
                             + txtFirstName.getText() + "&lastname=" + txtSurname.getText() +
                             "&email=" + txtEmail.getText() + "&contcatno=" + txtContactNumber.getText()
-                            + "&postcode=" + txtPostcode.getText());
+                            + "&postcode=" + txtPostcode.getText());*/
+
+                    Intent i = new Intent(getApplicationContext(), Donate.class);
+                    startActivity(i);
+                    finish();
                 }
 
             }

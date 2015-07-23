@@ -46,32 +46,12 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
         captureButton = (Button) findViewById(R.id.btnCapture);
-        cancelButton = (Button) findViewById(R.id.btnClear);
 
         captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (!tookPicture) {
-                    captureButton.setText("Confirm!");
-                    mCamera.takePicture(null, null, mPictureCallback);
-                } else {
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                    //i.putExtra("img", backgroundBitmap);
-                    startActivity(i);
-                    finish();
-                }
-            }
-        });
-
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCamera.stopPreview();
-                mPreviewRunning = false;
-                mCamera.release();
-            }
-        });
+                mCamera.takePicture(null, null, mPictureCallback);
+            }});
 
     }
 
@@ -145,16 +125,11 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         public void onPictureTaken(byte[] imageData, Camera c) {
             Bitmap backgroundBitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
 
-            if (!tookPicture) {
-                captureButton.setText("Confirm!");
-            } else {
                 Intent i = new Intent(getApplicationContext(), Share.class);
-                //i.putExtra("img", backgroundBitmap);
+                i.putExtra("img", backgroundBitmap);
                 startActivity(i);
                 finish();
-            }
-
-
         }
+
     };
 }

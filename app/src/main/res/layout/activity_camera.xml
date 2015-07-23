@@ -13,35 +13,22 @@
     android:weightSum="1">
 
     <SurfaceView android:id="@+id/surface_camera"
-        android:layout_width="match_parent_parent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
     </SurfaceView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <Button
-        android:id="@+id/btnClear"
-        android:layout_width="269dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background_red"
-        android:text="Clear"
-        android:layout_gravity="right"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
 
     <Button
         android:id="@+id/btnCapture"
-        android:layout_width="244dp"
+        android:layout_width="569dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_background_green"
+        android:background="@drawable/button_background_white"
         android:layout_gravity="left"
         android:text="Smile!"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="16dp" />
 
-    </RelativeLayout>
 
 </LinearLayout>

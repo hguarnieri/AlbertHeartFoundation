@@ -33,7 +33,9 @@ public class ContactInfo extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donate);
+        setContentView(R.layout.activity_phonenumber);
+
+        btnSendContact = (Button) findViewById(R.id.btnSendContact);
 
         listView = (ListView) findViewById(R.id.list_item_contact);
         final String[] values = getResources().getStringArray(R.array.contact_hours);
@@ -42,30 +44,10 @@ public class ContactInfo extends ActionBarActivity {
         btnSendContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext()).create();
-                alertDialog.setTitle("Done");
-                alertDialog.setMessage("Message sent!");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                finish();
-                            }
-                        });
-                alertDialog.show();
+                Toast.makeText(getApplicationContext(), "Message sent!", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Obtain the transaction result from the returned data.
-        TransactionResult result = TransactionResult.fromIntent(data);
-        // Use a toast to show the transaction result.
-        Toast.makeText(this, "Transaction result: " + result.getTransactionStatus(), Toast.LENGTH_LONG).show();
-        Intent i = new Intent(this, Print.class);
-        startActivity(i);
-        finish();
     }
 
     @Override
