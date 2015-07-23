@@ -34,22 +34,22 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
         // Load gender spinner data
-        Spinner spinner_gender = (Spinner) findViewById(R.id.spinner_gender);
+        //Spinner spinner_gender = (Spinner) findViewById(R.id.spinner_gender);
         // Build ArrayAdapter
-        ArrayAdapter<CharSequence> adapter_gender = ArrayAdapter.createFromResource(this,
-                R.array.gender_array, android.R.layout.simple_spinner_item);
+        //ArrayAdapter<CharSequence> adapter_gender = ArrayAdapter.createFromResource(this,
+                //R.array.gender_array, android.R.layout.simple_spinner_item);
         // Set layout
-        adapter_gender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_gender.setAdapter(adapter_gender);
+        //adapter_gender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //spinner_gender.setAdapter(adapter_gender);
 
         // Load age spinner data
-        Spinner spinner_age = (Spinner) findViewById(R.id.spinner_age);
+        //Spinner spinner_age = (Spinner) findViewById(R.id.spinner_age);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter_age = ArrayAdapter.createFromResource(this,
-                R.array.ages_array, android.R.layout.simple_spinner_item);
+        //ArrayAdapter<CharSequence> adapter_age = ArrayAdapter.createFromResource(this,
+         //       R.array.ages_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-        adapter_age.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_age.setAdapter(adapter_age);
+        //adapter_age.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //spinner_age.setAdapter(adapter_age);
 
         // ViewPager and its adapters use support library
         // fragments, so use getSupportFragmentManager.
@@ -130,7 +130,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     // Instances of this class are fragments representing a single
-// object in our collection.
+    // object in our collection.
     public static class PageObjectFragment extends Fragment {
         public static final String ARG_OBJECT = "object";
 

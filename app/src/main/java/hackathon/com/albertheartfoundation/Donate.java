@@ -67,6 +67,9 @@ public class Donate extends ActionBarActivity {
 
         });
 
+        final String[] list = getResources().getStringArray(R.array.donation_values);
+        listView.setAdapter(new ArrayAdapter<String>(this, R.layout.custom_arraylist, list));
+
         btnSetAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +99,8 @@ public class Donate extends ActionBarActivity {
                 startActivityForResult(payment.createIntent(), 0);
             }
         });
+
+
     }
 
     @Override

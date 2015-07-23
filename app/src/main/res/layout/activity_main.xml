@@ -1,28 +1,22 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ffdd1c24"
-    android:weightSum="1">
+    android:background="#ffdd1c24">
 
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffe91c23"
-        android:columnCount="13"
-        android:layout_weight="1">
 
         <ImageView
             android:layout_width="129dp"
             android:layout_height="129dp"
-            android:id="@+id/imageView"
+            android:id="@+id/image_logo"
             android:layout_row="23"
             android:layout_column="4"
-            android:src="@drawable/logo"/>
+            android:src="@drawable/heart"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btn_signup_button" />
 
-        <Spinner
+        <!--<Spinner
             android:layout_width="86dp"
             android:layout_height="wrap_content"
             android:id="@+id/spinner_gender"
@@ -35,34 +29,37 @@
             android:id="@+id/spinner_age"
             android:layout_row="23"
             android:layout_column="6"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dropdown" />-->
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
             android:layout_width="match_parent"
-            android:layout_height="644dp"
-            android:layout_row="24"
-            android:layout_column="4"
-            android:layout_columnSpan="3"/>
+            android:layout_height="700dp"
+            android:layout_below="@+id/image_logo"
+            android:layout_alignParentLeft="true"
+            android:layout_above="@+id/btn_signup_button"
+            android:layout_marginBottom="32dp"
+            android:layout_marginTop="32dp" />
 
         <Button
-            android:layout_width="275dp"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_background_white"
             android:text="Sign up"
             android:id="@+id/btn_signup_button"
-            android:layout_row="27"
-            android:layout_column="4"
-            android:layout_weight="0.40" />
+            android:layout_alignTop="@+id/btn_donate_button"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp" />
 
         <Button
-            android:layout_width="237dp"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_background_white"
             android:text="Donate"
             android:id="@+id/btn_donate_button"
-            android:layout_row="27"
-            android:layout_column="6"
-            android:layout_weight="0.40" />
+            android:layout_marginBottom="24dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp" />
 
-    </GridLayout>
-
-</LinearLayout>
+</RelativeLayout>

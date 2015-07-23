@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -25,6 +27,12 @@ public class MainSignup extends ActionBarActivity {
     Button btnSignin;
     ProgressDialog dialog;
 
+    EditText txtFirstName;
+    EditText txtSurname;
+    EditText txtEmail;
+    EditText txtContactNumber;
+    EditText txtPostcode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,21 +40,39 @@ public class MainSignup extends ActionBarActivity {
 
         dialog = new ProgressDialog(getApplicationContext());
 
+        txtFirstName = (EditText) findViewById(R.id.txtFirstSurname);
+        txtSurname = (EditText) findViewById(R.id.txtSurname);
+        txtEmail = (EditText) findViewById(R.id.txtEmail);
+        txtContactNumber = (EditText) findViewById(R.id.txtContact);
+        txtPostcode = (EditText) findViewById(R.id.txtPostcode);
+
         btnSignin = (Button) findViewById(R.id.btn_signup_button);
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BackgroundTask task = new BackgroundTask() {
-                    @Override
-                    protected void onPostExecute(Void result) {
-                        if (dialog.isShowing()) {
-                            dialog.dismiss();
+
+                if (txtFirstName.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "The first name cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (txtSurname.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "The Surname cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (txtEmail.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "The Email cannot be empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    BackgroundTask task = new BackgroundTask() {
+                        @Override
+                        protected void onPostExecute(Void result) {
+                            if (dialog.isShowing()) {
+                                dialog.dismiss();
+                            }
+                            Intent i = new Intent(getApplicationContext(), Donate.class);
+                            startActivity(i);
                         }
-                        Intent i = new Intent(getApplicationContext(), Donate.class);
-                        startActivity(i);
-                    }
-                };
-                task.execute("http://192.168.43.102:8080/heartfoundation/registerUser?firstname=Henrique&lastname=cantog&email=henrique122@advam.com&contcatno=043013123456&postcode=5001");
+                    };
+                    task.execute("http://192.168.43.102:8080/heartfoundation/registerUser?firstname="
+                            + txtFirstName.getText() + "&lastname=" + txtSurname.getText() +
+                            "&email=" + txtEmail.getText() + "&contcatno=" + txtContactNumber.getText()
+                            + "&postcode=" + txtPostcode.getText());
+                }
 
             }
         });
@@ -76,9 +102,7 @@ public class MainSignup extends ActionBarActivity {
 
     private class BackgroundTask extends AsyncTask<String, Void, Void> {
 
-
         public BackgroundTask() {
-
         }
 
         @Override
